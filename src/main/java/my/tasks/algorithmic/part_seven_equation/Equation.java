@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Task in part 7.
  * Output all positive integer solutions of the equation.
  * Equation:
- * a3 + b3 = c3 + d4
+ * a<sup>3</sup> + b<sup>3</sup> = c<sup>3</sup> + d<sup>3</sup>
  */
 public class Equation {
 
@@ -23,7 +23,7 @@ public class Equation {
 
     /**
      * Brute force solution.
-     * Time complexity O(N4).
+     * Time complexity O(N<sup>4</sup>).
      */
     private static int process(int limit) {
         int count = 0;
@@ -47,7 +47,7 @@ public class Equation {
 
     /**
      * Optimized solution.
-     * Time complexity O(N2).
+     * Time complexity O(N<sup>2</sup>).
      */
     private static int processOptimized(int limit) {
         Map<Integer, List<Pair>> map = new LinkedHashMap<>();
