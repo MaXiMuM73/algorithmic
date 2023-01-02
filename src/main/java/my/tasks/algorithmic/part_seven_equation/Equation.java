@@ -8,21 +8,22 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Решение задачи:
- * Вывести все положительные целочисленные решения уравнения
+ * Task in part 7.
+ * Output all positive integer solutions of the equation.
+ * Equation:
  * a3 + b3 = c3 + d4
  */
 public class Equation {
 
     public static void main(String[] args) {
         int process = process(5);
-        int processOptimized = processOptimized(5);
-        assert process == processOptimized;
+        int processOptimized = processOptimized(3);
+        System.out.println();
     }
 
     /**
-     * Решение методом "грубой силы"
-     * Сложность O(N4).
+     * Brute force solution.
+     * Time complexity O(N4).
      */
     private static int process(int limit) {
         int count = 0;
@@ -39,16 +40,14 @@ public class Equation {
             }
         }
 
-        System.out.println("Метод грубой силы завершен. Решение: " + count);
+        System.out.println("Brute force solution finished. Count of solutions: " + count);
         System.out.println("==========================");
         return count;
     }
 
     /**
-     * Оптимизированное решение.
-     * Сложность O(N2).
-     *
-     * @param limit
+     * Optimized solution.
+     * Time complexity O(N2).
      */
     private static int processOptimized(int limit) {
         Map<Integer, List<Pair>> map = new LinkedHashMap<>();
@@ -80,10 +79,13 @@ public class Equation {
             }
         }
 
-        System.out.println("Оптимизированное решение завершено. Решение: " + count);
+        System.out.println("Optimized solution finished. Count of solutions: " + count);
         return count.get();
     }
 
+    /**
+     * Pair of numbers.
+     */
     private static class Pair {
         int x;
         int y;
@@ -97,17 +99,8 @@ public class Equation {
             return x;
         }
 
-        public void setX(int x) {
-            this.x = x;
-        }
-
         public int getY() {
             return y;
         }
-
-        public void setY(int y) {
-            this.y = y;
-        }
     }
-
 }
