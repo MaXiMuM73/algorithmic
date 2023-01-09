@@ -1,4 +1,4 @@
-package my.tasks.algorithmic.part_seven_equation;
+package my.tasks.algorithmic;
 
 import com.google.common.base.Stopwatch;
 
