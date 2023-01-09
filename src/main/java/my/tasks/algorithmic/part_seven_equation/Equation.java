@@ -1,11 +1,13 @@
 package my.tasks.algorithmic.part_seven_equation;
 
+import com.google.common.base.Stopwatch;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Task in part 7.
@@ -16,17 +18,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Equation {
 
     public static void main(String[] args) {
-        int process = process(5);
-        int processOptimized = processOptimized(3);
-        System.out.println();
+        int limit = 100;
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        long bruteForceSolutions = process(limit);
+        long processMilliSeconds = stopwatch.elapsed().toMillis();
+
+        stopwatch = Stopwatch.createStarted();
+        long optimizedSolutions = processOptimized(limit);
+        long processOptimizedMilliSeconds = stopwatch.elapsed().toMillis();
+
+        System.out.println("Time process: " + processMilliSeconds + " ms");
+        System.out.println("Time process optimized: " + processOptimizedMilliSeconds + " ms");
+        System.out.println("Time difference: " + (processMilliSeconds - processOptimizedMilliSeconds) + " ms");
+        System.out.println("Limit: " + limit);
+        System.out.println("Brute force solution count: " + bruteForceSolutions);
+        System.out.println("Optimized solution count: " + optimizedSolutions);
     }
 
     /**
      * Brute force solution.
      * Time complexity O(N<sup>4</sup>).
      */
-    private static int process(int limit) {
-        int count = 0;
+    private static long process(int limit) {
+        long count = 0;
         for (int a = 1; a <= limit; a++) {
             for (int b = 1; b <= limit; b++) {
                 for (int c = 1; c <= limit; c++) {
@@ -40,7 +55,7 @@ public class Equation {
             }
         }
 
-        System.out.println("Brute force solution finished. Count of solutions: " + count);
+        System.out.println("Brute force solution finished");
         System.out.println("==========================");
         return count;
     }
@@ -49,7 +64,7 @@ public class Equation {
      * Optimized solution.
      * Time complexity O(N<sup>2</sup>).
      */
-    private static int processOptimized(int limit) {
+    private static long processOptimized(int limit) {
         Map<Integer, List<Pair>> map = new LinkedHashMap<>();
 
         for (int a = 1; a <= limit; a++) {
@@ -65,7 +80,7 @@ public class Equation {
             }
         }
 
-        AtomicInteger count = new AtomicInteger();
+        AtomicLong count = new AtomicLong();
         for (int c = 1; c <= limit; c++) {
             for (int d = 1; d <= limit; d++) {
                 Pair currentPair = new Pair(c, d);
@@ -79,7 +94,8 @@ public class Equation {
             }
         }
 
-        System.out.println("Optimized solution finished. Count of solutions: " + count);
+        System.out.println("Optimized solution finished");
+        System.out.println("==========================");
         return count.get();
     }
 
